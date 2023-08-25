@@ -1704,7 +1704,15 @@ class ImageEditor {
   getCanvas() {
     return this._graphics.getCanvas();
   }
-
+  /**
+   * Get the canvas size
+   * @returns {fabric.Image}
+   * @example
+   * var canvasImage = imageEditor.getCanvasImage();
+   */
+  getCanvasImage() {
+    return this._graphics.getCanvasImage();
+  }
   /**
    * Get the canvas size
    * @returns {Graphics}

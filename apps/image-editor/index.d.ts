@@ -294,6 +294,7 @@ declare namespace tuiImageEditor {
     public flipY(): Promise<IFlipXYResolveObject>;
     public getCanvasSize(): ICanvasSize;
     public getCanvas(): fabric.Canvas;
+    public getCanvasImage(): fabric.Image;
     public getCropzoneRect(): IRectConfig;
     public getDrawingMode(): string;
     public getImageName(): string;

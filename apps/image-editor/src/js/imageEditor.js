@@ -1,3 +1,4 @@
+/* eslint-disable lines-between-class-members */
 import { fabric } from 'fabric';
 import extend from 'tui-code-snippet/object/extend';
 import isUndefined from 'tui-code-snippet/type/isUndefined';
@@ -1694,7 +1695,7 @@ class ImageEditor {
     return this._graphics.getCanvasSize();
   }
 
-    /**
+  /**
    * Get the canvas size
    * @returns {fabric.Canvas} {{width: number, height: number}} canvas size
    * @example
@@ -1703,9 +1704,10 @@ class ImageEditor {
   getCanvas() {
     return this._graphics.getCanvas();
   }
-    /**
+
+  /**
    * Get the canvas size
-   * @returns {Graphics} {{width: number, height: number}} canvas size
+   * @returns {Graphics}
    * @example
    * var graphics = imageEditor.getGraphics();
    */

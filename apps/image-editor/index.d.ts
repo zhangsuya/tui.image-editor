@@ -1,4 +1,4 @@
-// Type definitions for TOAST UI Image Editor v3.15.7
+// Type definitions for TOAST UI Image Editor v3.15.71
 // TypeScript Version: 3.2.2
 
 declare namespace tuiImageEditor {
@@ -295,6 +295,7 @@ declare namespace tuiImageEditor {
     public getCanvasSize(): ICanvasSize;
     public getCanvas(): fabric.Canvas;
     public getCanvasImage(): fabric.Image;
+    public getCanvasElement(): HTMLCanvasElement;
     public getCropzoneRect(): IRectConfig;
     public getDrawingMode(): string;
     public getImageName(): string;

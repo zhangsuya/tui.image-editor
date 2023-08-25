@@ -1715,6 +1715,15 @@ class ImageEditor {
   }
   /**
    * Get the canvas size
+   * @returns {HTMLCanvasElement}
+   * @example
+   * var canvasElement = imageEditor.getCanvasElement();
+   */
+  getCanvasElement() {
+    return this._graphics.getCanvasElement();
+  }
+  /**
+   * Get the canvas size
    * @returns {Graphics}
    * @example
    * var graphics = imageEditor.getGraphics();

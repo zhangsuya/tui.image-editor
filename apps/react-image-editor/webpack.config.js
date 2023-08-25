@@ -8,14 +8,14 @@ module.exports = () => ({
   mode: 'production',
   entry: './src/index.js',
   output: {
-    filename: 'toastui-react-image-editor.js',
+    filename: 'fun-react-image-editor.js',
     path: path.resolve(__dirname, 'dist'),
     library: { type: 'commonjs2' },
   },
   externals: {
-    'tui-image-editor': {
-      commonjs: 'tui-image-editor',
-      commonjs2: 'tui-image-editor',
+    'fun-tui-image-editor': {
+      commonjs: 'fun-tui-image-editor',
+      commonjs2: 'fun-tui-image-editor',
     },
     react: {
       commonjs: 'react',

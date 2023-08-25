@@ -13,7 +13,7 @@ const vuePackage = require(VUE_PACKAGE_JSON_PATH);
 const version = corePackage.version;
 
 reactPackage.version = version;
-reactPackage.dependencies['tui-image-editor'] = `^${version}`;
+reactPackage.dependencies['fun-tui-image-editor'] = `^${version}`;
 
 fs.writeFileSync(REACT_PACKAGE_JSON_PATH, `${JSON.stringify(reactPackage, null, 2)}\n`);
 

@@ -12,7 +12,7 @@
     "canvas",
     "fabric"
   ],
-  "main": "dist/tui-image-editor.js",
+  "main": "dist/fun-tui-image-editor.js",
   "files": [
     "src",
     "dist",

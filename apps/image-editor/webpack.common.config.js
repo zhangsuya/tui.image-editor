@@ -14,7 +14,7 @@ module.exports = ({ minify, WEBPACK_BUILD }) => ({
     },
     path: path.resolve('dist'),
     publicPath: '/dist',
-    filename: `tui-image-editor${minify ? '.min' : ''}.js`,
+    filename: `fun-tui-image-editor${minify ? '.min' : ''}.js`,
   },
   resolve: {
     alias: {
@@ -65,7 +65,7 @@ module.exports = ({ minify, WEBPACK_BUILD }) => ({
       failOnError: WEBPACK_BUILD,
     }),
     new MiniCssExtractPlugin({
-      filename: `tui-image-editor${minify ? '.min' : ''}.css`,
+      filename: `fun-tui-image-editor${minify ? '.min' : ''}.css`,
     }),
   ],
 });

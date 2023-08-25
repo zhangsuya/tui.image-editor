@@ -1,5 +1,5 @@
 import React from 'react';
-import TuiImageEditor from 'tui-image-editor';
+import TuiImageEditor from 'fun-tui-image-editor';
 
 export default class ImageEditor extends React.Component {
   rootEl = React.createRef();

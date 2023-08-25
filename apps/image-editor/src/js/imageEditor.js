@@ -1694,6 +1694,24 @@ class ImageEditor {
     return this._graphics.getCanvasSize();
   }
 
+    /**
+   * Get the canvas size
+   * @returns {fabric.Canvas} {{width: number, height: number}} canvas size
+   * @example
+   * var canvas = imageEditor.getCanvas();
+   */
+  getCanvas() {
+    return this._graphics.getCanvas();
+  }
+    /**
+   * Get the canvas size
+   * @returns {Graphics} {{width: number, height: number}} canvas size
+   * @example
+   * var graphics = imageEditor.getGraphics();
+   */
+  getGraphics() {
+    return this._graphics;
+  }
   /**
    * Get object position by originX, originY
    * @param {number} id - object id

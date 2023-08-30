@@ -99,6 +99,12 @@ class FreeCircleSelecte extends Component {
     const newCanvasContext = newCanvasEle.getContext('2d');
     newCanvasContext.fillStyle = 'black';
     newCanvasContext.fillRect(0, 0, newCanvasEle.width, newCanvasEle.height);
+
+    // const secondCanvas = document.createElement('canvas');
+    // const cctx = secondCanvas.getContext('2d');
+    // secondCanvas.width = myCanvas.width;
+    // secondCanvas.height = myCanvas.height;
+
     newCanvasContext.fillStyle = 'white';
     newCanvasContext.fill();
     const realPath = path.path;
@@ -117,9 +123,20 @@ class FreeCircleSelecte extends Component {
     const canvasEl = this.getCanvas().getSelectionElement();
     const context = canvasEl.getContext('2d');
     // context.fillStyle = 'black';
-    context.fillStyle = 'black';
+    context.fillStyle = 'white';
     context.fill();
-    this.fire(eventNames.FREE_ADDING_LINE, path);
+    const secondCanvas = document.createElement('canvas');
+    const cctx = secondCanvas.getContext('2d');
+    secondCanvas.width = canvasEl.width;
+    secondCanvas.height = canvasEl.height;
+    cctx.drawImage(canvasEl, 0, 0);
+
+    context.fillStyle = 'black';
+    context.fillRect(0, 0, canvasEl.width, canvasEl.height);
+    // redraw the saved chart back to the main canvas
+    context.drawImage(secondCanvas, 0, 0);
+    const params = this.graphics.createObjectProperties(path.path);
+    this.fire(eventNames.FREE_ADDING_LINE, params);
     const link = document.createElement('a');
     link.href = canvasEl.toDataURL();
     const ext = 'png';

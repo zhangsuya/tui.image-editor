@@ -21,6 +21,7 @@ import {
 
 const {
   MOUSE_DOWN,
+  FREE_ADDING_LINE,
   OBJECT_MOVED,
   OBJECT_SCALED,
   OBJECT_ACTIVATED,
@@ -358,6 +359,7 @@ class ImageEditor {
       [ICON_CREATE_END]: this._handlers.iconCreateEnd,
       [SELECTION_CLEARED]: this._handlers.selectionCleared,
       [SELECTION_CREATED]: this._handlers.selectionCreated,
+      [FREE_ADDING_LINE]: this._handlers.freeDrawingLineAdd,
     });
   }
 
@@ -1321,9 +1323,13 @@ class ImageEditor {
     this._invoker.fire(events.EXECUTE_COMMAND, getObjectType(obj.type));
     this._pushAddObjectCommand(obj);
   }
-
-  _onFreeDrawingLineAdd(createdPath) {
-    this.fire(events.FREE_ADDING_LINE, createdPath);
+  /**
+   * 'freeDrawingLineAdd' event handler
+   * @param {Object} objectProps added object properties
+   * @private
+   */
+  _onFreeDrawingLineAdd(objectProps) {
+    this.fire(events.FREE_ADDING_LINE, objectProps);
   }
   /**
    * 'objectAdded' event handler

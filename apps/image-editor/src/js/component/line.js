@@ -61,6 +61,8 @@ class Line extends Component {
    * @param {{width: ?number, color: ?string}} [setting] - Brush width & color
    */
   start(setting = {}) {
+    console.log('line start');
+
     const canvas = this.getCanvas();
 
     canvas.defaultCursor = 'crosshair';

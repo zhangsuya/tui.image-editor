@@ -226,6 +226,7 @@ class ImageEditor {
       iconCreateEnd: this._onIconCreateEnd.bind(this),
       selectionCleared: this._selectionCleared.bind(this),
       selectionCreated: this._selectionCreated.bind(this),
+      freeDrawingLineAdd: this._onFreeDrawingLineAdd.bind(this),
     };
 
     this._attachInvokerEvents();
@@ -1321,6 +1322,9 @@ class ImageEditor {
     this._pushAddObjectCommand(obj);
   }
 
+  _onFreeDrawingLineAdd(createdPath) {
+    this.fire(events.FREE_ADDING_LINE, createdPath);
+  }
   /**
    * 'objectAdded' event handler
    * @param {Object} objectProps added object properties

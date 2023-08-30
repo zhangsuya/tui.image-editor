@@ -31,6 +31,9 @@ class FreeDrawing extends Component {
    * @param {{width: ?number, color: ?string}} [setting] - Brush width & color
    */
   start(setting) {
+    // eslint-disable-next-line no-console
+    console.log('freeDraw start');
+
     const canvas = this.getCanvas();
 
     canvas.isDrawingMode = true;
@@ -58,7 +61,7 @@ class FreeDrawing extends Component {
    */
   end() {
     const canvas = this.getCanvas();
-
+    console.log('freeDraw end');
     canvas.isDrawingMode = false;
   }
 }

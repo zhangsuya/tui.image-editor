@@ -108,14 +108,16 @@ class FreeCircleSelecte extends Component {
     newCanvasContext.fillStyle = 'white';
     newCanvasContext.fill();
     const realPath = path.path;
+    realPath.strokeDashArray = [5, 5];
+    realPath.strokeDashOffset = 0;
     newCnavs.add(realPath);
     newCnavs.requestRenderAll();
     realPath.setCoords();
-    const link = document.createElement('a');
-    link.href = myCanvas.toDataURL();
-    const ext = 'png';
-    link.download = `eraser_example.${ext}`;
-    link.click();
+    realPath.animate('strokeDashOffset', '-=3', {
+      duration: 100,
+      onchange: this.getCanvas().renderAll.bind(this.getCanvas()),
+      repeat: true,
+    });
   }
 
   _onPathCreated(path) {
@@ -137,12 +139,6 @@ class FreeCircleSelecte extends Component {
     context.drawImage(secondCanvas, 0, 0);
     const params = this.graphics.createObjectProperties(path.path);
     this.fire(eventNames.FREE_ADDING_LINE, params);
-    const link = document.createElement('a');
-    link.href = canvasEl.toDataURL();
-    const ext = 'png';
-    link.download = `eraser_example.${ext}`;
-    link.click();
-    console.log('FreeCircleSelecte click');
   }
 }
 

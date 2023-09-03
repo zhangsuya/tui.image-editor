@@ -108,9 +108,12 @@ class FreeCircleSelecte extends Component {
     newCanvasContext.fillStyle = 'white';
     newCanvasContext.fill();
     const realPath = path.path;
+    realPath.stroke = 'red';
+    realPath.strokeWidth = 2;
     realPath.strokeDashArray = [5, 5];
-    realPath.strokeDashOffset = 0;
     newCnavs.add(realPath);
+    // eslint-disable-next-line no-undef
+    this._animateDashedLine(realPath);
     newCnavs.requestRenderAll();
     realPath.setCoords();
     realPath.animate('strokeDashOffset', '-=3', {
@@ -139,6 +142,30 @@ class FreeCircleSelecte extends Component {
     context.drawImage(secondCanvas, 0, 0);
     const params = this.graphics.createObjectProperties(path.path);
     this.fire(eventNames.FREE_ADDING_LINE, params);
+  }
+
+  // 定义动画函数
+  _animateDashedLine(path) {
+    const offset = 0;
+    const speed = 1;
+    // 启动动画
+    // eslint-disable-next-line no-undef
+    this._animate(offset, speed, path);
+  }
+
+  _animate(offset, speed, path) {
+    offset += speed;
+    console.log('FreeCircleSelecte animate');
+    console.log(offset);
+    path.set({
+      strokeDashOffset: -offset,
+    });
+
+    this.getCanvas().renderAll();
+    setTimeout(() => {
+      this._animate(offset, speed, path);
+    }, 10);
+    // 循环调用动画函数
   }
 }
 

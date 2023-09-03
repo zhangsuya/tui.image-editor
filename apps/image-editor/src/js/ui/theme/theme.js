@@ -244,6 +244,22 @@ class Theme {
       isSubmenu
     )}</svg>`;
   }
+
+  _makeImageItemOnclick(src, index) {
+    src.onclick(index);
+  }
+
+  _makeImageItem(src, index) {
+    console.log('makeImageItem');
+    console.log(src);
+    // console.log(src.onclick);
+
+    return `<div class="tui-image-editor-submenu-images-item preview"><div class="image" id=${index} style="background-image: url(${src.src});"></div></div>`;
+  }
+
+  makeImagesSet(scrs) {
+    return scrs.map((src, index) => this._makeImageItem(src, index)).join('');
+  }
 }
 
 export default Theme;

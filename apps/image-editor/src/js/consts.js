@@ -75,6 +75,7 @@ export const componentNames = keyMirror(
   'LINE',
   'TEXT',
   'ICON',
+  'IMAGES',
   'FILTER',
   'SHAPE',
   'ZOOM',

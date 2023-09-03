@@ -21,6 +21,7 @@ import Rotate from '@/ui/rotate';
 import Text from '@/ui/text';
 import Mask from '@/ui/mask';
 import Icon from '@/ui/icon';
+import Images from '@/ui/images';
 import Draw from '@/ui/draw';
 import Filter from '@/ui/filter';
 import History from '@/ui/history';
@@ -35,6 +36,7 @@ const SUB_UI_COMPONENT = {
   Text,
   Mask,
   Icon,
+  Images,
   Draw,
   Filter,
 };
@@ -84,7 +86,7 @@ class Ui {
     this._makeUiElement(element);
     this._setUiSize();
     this._initMenuEvent = false;
-
+    this.imageSrcs = [];
     this._makeSubMenu();
 
     this._attachHistoryEvent();
@@ -257,6 +259,7 @@ class Ui {
           'draw',
           'shape',
           'icon',
+          'images',
           'text',
           'mask',
           'filter',
@@ -267,6 +270,7 @@ class Ui {
           height: '100%',
         },
         menuBarPosition: 'bottom',
+        imageSrcs: [],
       },
       options
     );
@@ -304,6 +308,8 @@ class Ui {
       this[menuName] = new SubComponentClass(this._subMenuElement, {
         locale: this._locale,
         makeSvgIcon: this.theme.makeMenSvgIconSet.bind(this.theme),
+        makeImages: this.theme.makeImagesSet.bind(this.theme),
+        srcs: this.options.imageSrcs,
         menuBarPosition: this.options.menuBarPosition,
         usageStatistics: this.options.usageStatistics,
       });
@@ -385,6 +391,7 @@ class Ui {
     this._historyMenu = new History(this._buttonElements[HISTORY_MENU], {
       locale: this._locale,
       makeSvgIcon: this.theme.makeMenSvgIconSet.bind(this.theme),
+      makeImages: this.theme.makeImagesSet.bind(this.theme),
     });
 
     this._activateZoomMenus();
@@ -749,6 +756,60 @@ class Ui {
 
   /**
    * change menu
+   * @param {string[]} imageSrcs - menu name
+   * @ignore
+   */
+  changeImagesMenu(imageSrcs) {
+    const toggle = true;
+    const discardSelection = true;
+    const menuName = 'images';
+    this.options.imageSrcs = imageSrcs;
+    const SubComponentClass =
+      SUB_UI_COMPONENT[menuName.replace(/^[a-z]/, ($0) => $0.toUpperCase())];
+
+    // make menu element
+    // this._makeMenuElement(menuName);
+
+    // menu btn element
+    // this._buttonElements[menuName] = this._menuBarElement.querySelector(`.tie-btn-${menuName}`);
+
+    // submenu ui instance
+    this[menuName] = new SubComponentClass(this._subMenuElement, {
+      locale: this._locale,
+      makeSvgIcon: this.theme.makeMenSvgIconSet.bind(this.theme),
+      makeImages: this.theme.makeImagesSet.bind(this.theme),
+      srcs: this.options.imageSrcs,
+      menuBarPosition: this.options.menuBarPosition,
+      usageStatistics: this.options.usageStatistics,
+    });
+    if (!this._submenuChangeTransection) {
+      this._submenuChangeTransection = true;
+      if (this.submenu) {
+        this._buttonElements[this.submenu].classList.remove('active');
+        this._mainElement.classList.remove(`tui-image-editor-menu-${this.submenu}`);
+        if (discardSelection) {
+          this._actions.main.discardSelection();
+        }
+        this._actions.main.changeSelectableAll(true);
+        this[this.submenu].changeStandbyMode();
+      }
+
+      if (this.submenu === menuName && toggle) {
+        this.submenu = null;
+      } else {
+        // this._buttonElements[menuName].classList.add('active');
+        this._mainElement.classList.add(`tui-image-editor-menu-${menuName}`);
+        // this.submenu = menuName;
+        // this[this.submenu].changeStartMode();
+      }
+
+      this.resizeEditor();
+      this._submenuChangeTransection = false;
+    }
+  }
+
+  /**
+   * change menu
    * @param {string} menuName - menu name
    * @param {boolean} toggle - whether toggle or not
    * @param {boolean} discardSelection - discard selection
@@ -791,6 +852,9 @@ class Ui {
     if (this.icon) {
       this.icon.registerDefaultIcon();
     }
+    // if (this.images) {
+    //   this.images.registerDefaultIcon();
+    // }
   }
 
   /**

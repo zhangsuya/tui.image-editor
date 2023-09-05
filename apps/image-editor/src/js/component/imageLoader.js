@@ -50,6 +50,18 @@ class ImageLoader extends Component {
     return promise;
   }
 
+  clear() {
+    const canvas = this.getCanvas();
+
+    canvas.backgroundImage = null;
+    canvas.renderAll();
+
+    return new Promise((resolve) => {
+      this.setCanvasImage('', null);
+      resolve();
+    });
+  }
+
   /**
    * Set background image
    * @param {?(fabric.Image|String)} img fabric.Image instance or URL of an image to set background to

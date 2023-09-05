@@ -7,8 +7,16 @@
 export default ({ locale, makeImages, srcs }) => `
     <div class="tui-image-editor-submenu-images">
         ${makeImages(srcs)}
-        <li>
-            <div class="tie-icon-color" title="${locale.localize('Color')}"></div>
-        </li>
+        <ul class="tui-image-editor-submenu-item">
+            <li>
+                <div class="tie-images-color" title="${locale.localize('Color')}"></div>
+            </li>
+            <li class="tui-image-editor-partition only-left-right">
+                <div></div>
+            </li>
+            <li>
+                <div class="tie-icon-color" title="${locale.localize('Color')}"></div>
+            </li>
+        </ul>
     </div>
 `;

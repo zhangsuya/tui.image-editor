@@ -23,6 +23,7 @@ export default {
       icon: this._iconAction(),
       filter: this._filterAction(),
       history: this._historyAction(),
+      images: this._imagesAction(),
     };
   },
 
@@ -241,6 +242,24 @@ export default {
    * @private
    */
   _drawAction() {
+    return extend(
+      {
+        changeColor: (color) => {
+          if (this.activeObjectId) {
+            this.changeIconColor(this.activeObjectId, color);
+          }
+        },
+        setColor: (color) => {
+          this.setBrush({
+            color,
+          });
+        },
+      },
+      this._commonAction()
+    );
+  },
+
+  _imagesAction() {
     return extend(
       {
         setDrawMode: (type, settings) => {

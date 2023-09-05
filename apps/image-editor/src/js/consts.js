@@ -113,6 +113,7 @@ export const CROPZONE_DEFAULT_OPTIONS = {
 export const commandNames = {
   CLEAR_OBJECTS: 'clearObjects',
   LOAD_IMAGE: 'loadImage',
+  CLEAR_IMAGE: 'clearImage',
   FLIP_IMAGE: 'flip',
   ROTATE_IMAGE: 'rotate',
   ADD_OBJECT: 'addObject',
@@ -290,6 +291,7 @@ export const rejectMessages = {
   invalidParameters: 'Invalid parameters.',
   isLock: 'The executing command state is locked.',
   loadImage: 'The background image is empty.',
+  clearImage: 'The background image is not empty.',
   loadingImageFailed: 'Invalid image loaded.',
   noActiveObject: 'There is no active object.',
   noObject: 'The object is not in canvas.',

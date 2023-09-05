@@ -31,6 +31,11 @@ class Images extends Submenu {
     this._els = {
       registerIconButton: this.selector('.tie-icon-image-file'),
       addImageButton: this.selectorAll('.tui-image-editor-submenu-images-item'),
+      drawColorPicker: new Colorpicker(this.selector('.tie-images-color'), {
+        defaultColor: '#00a9ff',
+        toggleDirection: this.toggleDirection,
+        usageStatistics: this.usageStatistics,
+      }),
       iconColorpicker: new Colorpicker(this.selector('.tie-icon-color'), {
         defaultColor: '#ffbb3b',
         toggleDirection: this.toggleDirection,
@@ -40,6 +45,9 @@ class Images extends Submenu {
     console.log('this._els.addImageButton');
     console.log(this._els.addImageButton);
 
+    this.type = null;
+    this.color = this._els.drawColorPicker.color;
+
     this.colorPickerInputBox = this._els.iconColorpicker.colorpickerElement.querySelector(
       selectorNames.COLOR_PICKER_INPUT_BOX
     );
@@ -48,6 +56,7 @@ class Images extends Submenu {
       const imageButton = this._els.addImageButton[i];
       imageButton.addEventListener('click', addImage);
     }
+    this._els.drawColorPicker.on('change', this._changeDrawColor.bind(this));
   }
 
   /**
@@ -58,6 +67,20 @@ class Images extends Submenu {
     this._els.iconColorpicker.destroy();
 
     assignmentForDestroy(this);
+  }
+
+  changeStartMode() {
+    // this.actions.modeChange('images');
+  }
+
+  /**
+   * Change drawing color
+   * @param {string} color - select drawing color
+   * @private
+   */
+  _changeDrawColor(color) {
+    this.color = color || 'transparent';
+    this.actions.changeColor(this.color);
   }
 
   /**

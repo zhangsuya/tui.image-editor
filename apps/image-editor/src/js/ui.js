@@ -799,8 +799,8 @@ class Ui {
       } else {
         // this._buttonElements[menuName].classList.add('active');
         this._mainElement.classList.add(`tui-image-editor-menu-${menuName}`);
-        // this.submenu = menuName;
-        // this[this.submenu].changeStartMode();
+        this.submenu = menuName;
+        this[this.submenu].changeStartMode();
       }
 
       this.resizeEditor();

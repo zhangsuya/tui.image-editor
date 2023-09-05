@@ -646,6 +646,8 @@ class ImageEditor {
   execute(commandName, ...args) {
     // Inject an Graphics instance as first parameter
     const theArgs = [this._graphics].concat(args);
+    console.log('theArgs');
+    console.log(theArgs);
 
     return this._invoker.execute(commandName, ...theArgs);
   }
@@ -758,6 +760,10 @@ class ImageEditor {
     }
 
     return this.execute(commands.LOAD_IMAGE, imageName, url);
+  }
+
+  clearImage() {
+    return this.execute(commands.CLEAR_IMAGE, 'haha', 'haha');
   }
 
   /**
@@ -1354,6 +1360,7 @@ class ImageEditor {
      * @param {ObjectProps} props - object properties
      * @deprecated
      */
+    console.log(objectProps);
     this.fire(ADD_OBJECT_AFTER, objectProps);
   }
 

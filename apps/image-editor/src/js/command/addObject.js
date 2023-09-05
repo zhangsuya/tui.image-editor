@@ -14,6 +14,8 @@ const command = {
     return new Promise((resolve, reject) => {
       if (!graphics.contains(object)) {
         graphics.add(object);
+        console.log('addObject execute');
+        console.log(object);
         resolve(object);
       } else {
         reject(rejectMessages.addedObject);

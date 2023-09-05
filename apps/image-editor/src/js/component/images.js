@@ -1,8 +1,7 @@
 import { fabric } from 'fabric';
-import extend from 'tui-code-snippet/object/extend';
 import forEach from 'tui-code-snippet/collection/forEach';
 import Component from '@/interface/component';
-import { eventNames as events, rejectMessages, componentNames, fObjectOptions } from '@/consts';
+import { eventNames as events, componentNames } from '@/consts';
 
 const pathMap = {
   arrow: 'M 0 90 H 105 V 120 L 160 60 L 105 0 V 30 H 0 Z',
@@ -54,7 +53,6 @@ class Images extends Component {
      * @private
      */
     this._handlers = {
-      mousedown: this._onFabricMouseDown.bind(this),
       mousemove: this._onFabricMouseMove.bind(this),
       mouseup: this._onFabricMouseUp.bind(this),
     };
@@ -95,45 +93,6 @@ class Images extends Component {
   }
 
   /**
-   * Add icon
-   * @param {string} type - Icon type
-   * @param {Object} options - Icon options
-   *      @param {string} [options.fill] - Icon foreground color
-   *      @param {string} [options.left] - Icon x position
-   *      @param {string} [options.top] - Icon y position
-   * @returns {Promise}
-   */
-  add(type, options) {
-    return new Promise((resolve, reject) => {
-      const canvas = this.getCanvas();
-      const path = this._pathMap[type];
-      const selectionStyle = fObjectOptions.SELECTION_STYLE;
-      const icon = path ? this._createIcon(path) : null;
-      this._icon = icon;
-
-      if (!icon) {
-        reject(rejectMessages.invalidParameters);
-      }
-
-      icon.set(
-        extend(
-          {
-            type: 'icon',
-            fill: this._oColor,
-          },
-          selectionStyle,
-          options,
-          this.graphics.controlStyle
-        )
-      );
-
-      canvas.add(icon).setActiveObject(icon);
-
-      resolve(this.graphics.createObjectProperties(icon));
-    });
-  }
-
-  /**
    * Register icon paths
    * @param {{key: string, value: string}} pathInfos - Path infos
    */
@@ -153,12 +112,9 @@ class Images extends Component {
    * @param {fabric.Path}[obj] - Current activated path object
    */
   setColor(color, obj) {
+    console.log(obj);
     this._oColor = color;
-
-    if (obj && obj.get('type') === 'icon') {
-      obj.set({ fill: this._oColor });
-      this.getCanvas().renderAll();
-    }
+    this.getCanvas().setBackgroundColor('red', function () {});
   }
 
   /**
@@ -184,22 +140,6 @@ class Images extends Component {
    * @param {{target: fabric.Object, e: MouseEvent}} fEvent - Fabric event object
    * @private
    */
-  _onFabricMouseDown(fEvent) {
-    const canvas = this.getCanvas();
-
-    this._startPoint = canvas.getPointer(fEvent.e);
-    const { x: left, y: top } = this._startPoint;
-
-    this.add(this._type, {
-      left,
-      top,
-      fill: this._iconColor,
-    }).then(() => {
-      this.fire(events.ADD_OBJECT, this.graphics.createObjectProperties(this._icon));
-      canvas.on('mouse:move', this._handlers.mousemove);
-      canvas.on('mouse:up', this._handlers.mouseup);
-    });
-  }
 
   /**
    * MouseMove event handler on canvas
@@ -232,7 +172,7 @@ class Images extends Component {
    */
   _onFabricMouseUp() {
     const canvas = this.getCanvas();
-
+    console.log('Images _onFabricMouseUp');
     this.fire(events.OBJECT_ADDED, this.graphics.createObjectProperties(this._icon));
 
     this._icon = null;

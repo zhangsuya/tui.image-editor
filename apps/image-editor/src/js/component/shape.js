@@ -222,14 +222,15 @@ export default class Shape extends Component {
       const extendOption = this._extendOptions(options);
 
       const shapeObj = this._createInstance(type, extendOption);
+      console.log(shapeObj);
       const objectProperties = this.graphics.createObjectProperties(shapeObj);
-
+      console.log(objectProperties);
       this._bindEventOnShape(shapeObj);
-
+      console.log(shapeObj);
       canvas.add(shapeObj).setActiveObject(shapeObj);
 
       this._resetPositionFillFilter(shapeObj);
-
+      console.log(objectProperties);
       resolve(objectProperties);
     });
   }

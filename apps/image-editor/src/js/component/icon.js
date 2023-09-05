@@ -195,6 +195,7 @@ class Icon extends Component {
       top,
       fill: this._iconColor,
     }).then(() => {
+      console.log(this._icon);
       this.fire(events.ADD_OBJECT, this.graphics.createObjectProperties(this._icon));
       canvas.on('mouse:move', this._handlers.mousemove);
       canvas.on('mouse:up', this._handlers.mouseup);

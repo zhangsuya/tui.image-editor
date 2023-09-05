@@ -140,6 +140,7 @@ class FreeCircleSelecte extends Component {
     context.fillRect(0, 0, canvasEl.width, canvasEl.height);
     // redraw the saved chart back to the main canvas
     context.drawImage(secondCanvas, 0, 0);
+    console.log(path.path);
     const params = this.graphics.createObjectProperties(path.path);
     this.fire(eventNames.FREE_ADDING_LINE, params);
   }

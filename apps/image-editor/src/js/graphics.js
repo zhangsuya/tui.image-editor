@@ -1,4 +1,5 @@
 import { fabric } from 'fabric';
+import isUndefined from 'tui-code-snippet/type/isUndefined';
 import extend from 'tui-code-snippet/object/extend';
 import isArray from 'tui-code-snippet/type/isArray';
 import isString from 'tui-code-snippet/type/isString';
@@ -1236,6 +1237,7 @@ class Graphics {
    */
   _onObjectSelected(fEvent) {
     const { target } = fEvent;
+    console.log(target);
     const params = this.createObjectProperties(target);
 
     this.fire(events.OBJECT_ACTIVATED, params);
@@ -1257,9 +1259,9 @@ class Graphics {
         fObjectOptions.SELECTION_STYLE
       )
     );
-
+    console.log(obj.path);
     const params = this.createObjectProperties(obj.path);
-
+    console.log(params);
     this.fire(events.ADD_OBJECT, params);
   }
 
@@ -1277,7 +1279,14 @@ class Graphics {
    * @private
    */
   _onSelectionCreated(fEvent) {
+    if (fEvent === null || isUndefined(fEvent)) {
+      return;
+    }
     const { target } = fEvent;
+    if (target === null || isUndefined(target)) {
+      return;
+    }
+    console.log(target);
     const params = this.createObjectProperties(target);
 
     this.fire(events.OBJECT_ACTIVATED, params);
@@ -1320,6 +1329,8 @@ class Graphics {
       'opacity',
       'angle',
     ];
+    console.log('createObjectProperties');
+    console.log(obj);
     const props = {
       id: stamp(obj),
       type: obj.type,
@@ -1439,9 +1450,10 @@ class Graphics {
    */
   _cloneObjectItem(targetObject) {
     return this._copyFabricObjectForPaste(targetObject).then((clonedObject) => {
+      console.log(clonedObject);
       const objectProperties = this.createObjectProperties(clonedObject);
       this.add(clonedObject);
-
+      console.log(objectProperties);
       this.fire(events.ADD_OBJECT, objectProperties);
 
       return clonedObject;
@@ -1491,7 +1503,7 @@ class Graphics {
         if (isShape(cloned)) {
           shapeComp.processForCopiedObject(cloned, targetObject);
         }
-
+        console.log(cloned);
         resolve(cloned);
       });
     });

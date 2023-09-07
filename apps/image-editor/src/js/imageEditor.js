@@ -21,6 +21,7 @@ import {
 
 const {
   MOUSE_DOWN,
+  MOUSE_MOVE,
   FREE_ADDING_LINE,
   OBJECT_MOVED,
   OBJECT_SCALED,
@@ -212,6 +213,7 @@ class ImageEditor {
     this._handlers = {
       keydown: this._onKeyDown.bind(this),
       mousedown: this._onMouseDown.bind(this),
+      mousemove: this._onMouseMove.bind(this),
       objectActivated: this._onObjectActivated.bind(this),
       objectMoved: this._onObjectMoved.bind(this),
       objectScaled: this._onObjectScaled.bind(this),
@@ -345,6 +347,7 @@ class ImageEditor {
   _attachGraphicsEvents() {
     this._graphics.on({
       [MOUSE_DOWN]: this._handlers.mousedown,
+      [MOUSE_MOVE]: this._handlers.mousemove,
       [OBJECT_MOVED]: this._handlers.objectMoved,
       [OBJECT_SCALED]: this._handlers.objectScaled,
       [OBJECT_ROTATED]: this._handlers.objectRotated,
@@ -456,6 +459,9 @@ class ImageEditor {
     this.fire(events.MOUSE_DOWN, event, originPointer);
   }
 
+  _onMouseMove(event, originPointer) {
+    this.fire(events.MOUSE_MOVE, event, originPointer);
+  }
   /**
    * Add a 'addObject' command
    * @param {Object} obj - Fabric object

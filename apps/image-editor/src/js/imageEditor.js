@@ -795,6 +795,7 @@ class ImageEditor {
    * @param {Object} [option] parameters of drawing mode, it's available with 'FREE_DRAWING', 'LINE_DRAWING'
    *  @param {Number} [option.width] brush width
    *  @param {String} [option.color] brush color
+   *  @param {boolean} [option.renderCanvas] Instantly render the canvas when true.
    *  @param {Object} [option.arrowType] arrow decorate
    *    @param {string} [option.arrowType.tail] arrow decorate for tail. 'chevron' or 'triangle'
    *    @param {string} [option.arrowType.head] arrow decorate for head. 'chevron' or 'triangle'

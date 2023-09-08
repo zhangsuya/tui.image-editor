@@ -18,6 +18,8 @@ class FreeCircleSelecte extends Component {
      */
     this.width = 1;
 
+    this.renderCanvas = false;
+
     /**
      * fabric.Color instance for brush color
      * @type {fabric.Color}
@@ -40,7 +42,6 @@ class FreeCircleSelecte extends Component {
    */
   start(setting) {
     const canvas = this.getCanvas();
-
     canvas.on({
       'before:path:created': this._listeners.beforePathCreated,
       'path:created': this._listeners.pathCreated,
@@ -57,9 +58,15 @@ class FreeCircleSelecte extends Component {
     const brush = this.getCanvas().freeDrawingBrush;
 
     setting = setting || {};
+    console.log('FreeCircleSelecte setBrush');
+    console.log(setting);
+
     this.width = setting.width || this.width;
     if (setting.color) {
       this.oColor = new fabric.Color(setting.color);
+    }
+    if (setting.renderCanvas) {
+      this.renderCanvas = setting.renderCanvas;
     }
     brush.width = this.width;
     brush.color = this.oColor.toRgba();
@@ -75,6 +82,9 @@ class FreeCircleSelecte extends Component {
   }
 
   _onBeforePathCreated(path) {
+    if (!self.renderCanvas) {
+      return;
+    }
     console.log('FreeCircleSelecte end');
     // const canvasEl = this.getCanvas().getSelectionElement();
     // const context = canvasEl.getContext('2d');
@@ -124,6 +134,12 @@ class FreeCircleSelecte extends Component {
   }
 
   _onPathCreated(path) {
+    console.log(path.path);
+    const params = this.graphics.createObjectProperties(path.path);
+    this.fire(eventNames.FREE_ADDING_LINE, params);
+    if (!self.renderCanvas) {
+      return;
+    }
     console.log('FreeCircleSelecte end');
     const canvasEl = this.getCanvas().getSelectionElement();
     const context = canvasEl.getContext('2d');
@@ -140,9 +156,6 @@ class FreeCircleSelecte extends Component {
     context.fillRect(0, 0, canvasEl.width, canvasEl.height);
     // redraw the saved chart back to the main canvas
     context.drawImage(secondCanvas, 0, 0);
-    console.log(path.path);
-    const params = this.graphics.createObjectProperties(path.path);
-    this.fire(eventNames.FREE_ADDING_LINE, params);
   }
 
   // 定义动画函数

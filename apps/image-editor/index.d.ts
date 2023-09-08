@@ -332,7 +332,7 @@ declare namespace tuiImageEditor {
     public setObjectPosition(id: number, posInfo?: IPositionConfig): Promise<void>;
     public setObjectProperties(id: number, keyValue?: IGraphicObjectProps): Promise<void>;
     public setObjectPropertiesQuietly(id: number, keyValue?: IGraphicObjectProps): Promise<void>;
-    public startDrawingMode(mode: string, option?: { width?: number; color?: string }): boolean;
+    public startDrawingMode(mode: string, option?: { width?: number; color?: string; renderCanvas?: boolean }): boolean;
     public stopDrawingMode(): void;
     public toDataURL(options?: IToDataURLOptions): string;
     public undo(iterationCount: number): Promise<any>;

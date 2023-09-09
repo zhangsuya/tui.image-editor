@@ -789,6 +789,18 @@ class ImageEditor {
     return this.execute(commands.ADD_IMAGE_OBJECT, imgUrl);
   }
 
+  addOtherObject(obj) {
+    this._graphics.createObjectProperties(obj);
+    this.setObjectPosition(obj.id, {
+      x: 0,
+      y: 0,
+      originX: 'left',
+      originY: 'top',
+    });
+    this.getCanvas().add(obj);
+    // this.getCanvas().setActiveObject(obj);
+    // this.execute(commands.ADD_OBJECT, this._graphics.createObjectProperties(obj));
+  }
   /**
    * Start a drawing mode. If the current mode is not 'NORMAL', 'stopDrawingMode()' will be called first.
    * @param {String} mode Can be one of <I>'CROPPER', 'FREE_DRAWING', 'LINE_DRAWING', 'TEXT', 'SHAPE'</I>

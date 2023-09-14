@@ -268,6 +268,13 @@ export default {
   },
 
   _imagesAction() {
+    const exitCropOnAction = () => {
+      if (this.ui.submenu === 'crop') {
+        this.stopDrawingMode();
+        this.ui.changeMenu('crop');
+      }
+    };
+
     return extend(
       {
         changeColor: (color) => {
@@ -281,6 +288,17 @@ export default {
           } else {
             this.startDrawingMode('LINE_DRAWING', settings);
           }
+        },
+        load: (file) => {
+          const imgUrl = URL.createObjectURL(file);
+          const imageName = file.name;
+          this.loadImageFromURL(imgUrl, imageName).then((sizeValue) => {
+            exitCropOnAction();
+            this.ui.initializeImgUrl = imgUrl;
+            this.ui.resizeEditor({ imageSize: sizeValue });
+            this.clearUndoStack();
+            this._invoker.fire(eventNames.EXECUTE_COMMAND, historyNames.LOAD_IMAGE);
+          });
         },
         setColor: (color) => {
           this.setBrush({

@@ -31,6 +31,7 @@ class Images extends Submenu {
     this._els = {
       registerIconButton: this.selector('.tie-icon-image-file'),
       addImageButton: this.selectorAll('.tui-image-editor-submenu-images-item'),
+      loadImageButton: this.selector('.tui-image-editor-load-btn'),
       drawColorPicker: new Colorpicker(this.selector('.tie-images-color'), {
         defaultColor: '#ffffff',
         toggleDirection: this.toggleDirection,
@@ -97,15 +98,18 @@ class Images extends Submenu {
     console.log('image addEvent');
     const registerIcon = this._registerIconHandler.bind(this);
     const addImage = this._addImageHandler.bind(this);
+    const loadImage = this._loadImageHandler.bind(this);
 
     this.eventHandler = {
       registerIcon,
       addImage,
+      loadImage,
     };
 
     this.actions = actions;
     this._els.iconColorpicker.on('change', this._changeColorHandler.bind(this));
     this._els.registerIconButton.addEventListener('change', registerIcon);
+    this._els.loadImageButton.addEventListener('change', loadImage);
     // this._els.addImageButton((imageButton) => {
     //   imageButton.addEventListener('click', addImage);
     // });
@@ -201,6 +205,10 @@ class Images extends Submenu {
     //     this.iconType = iconType;
     //   }
     // }
+  }
+
+  _loadImageHandler(event) {
+    this.actions.load(event.target.files[0]);
   }
 
   /**

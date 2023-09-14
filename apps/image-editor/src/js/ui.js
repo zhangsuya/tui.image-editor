@@ -820,6 +820,7 @@ class Ui {
    * @private
    */
   _changeMenu(menuName, toggle, discardSelection) {
+    this.fire(eventNames.CHANGE_SUB_MENU);
     if (this.submenu) {
       if (this._buttonElements[this.submenu]) {
         this._buttonElements[this.submenu].classList.remove('active');

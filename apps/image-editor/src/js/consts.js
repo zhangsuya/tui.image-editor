@@ -173,6 +173,7 @@ export const eventNames = {
   KEY_UP: 'keyup',
   INPUT_BOX_EDITING_STARTED: 'inputBoxEditingStarted',
   INPUT_BOX_EDITING_STOPPED: 'inputBoxEditingStopped',
+  CHANGE_SUB_MENU: 'changeSubMenu',
   FOCUS: 'focus',
   BLUR: 'blur',
   IMAGE_RESIZED: 'imageResized',

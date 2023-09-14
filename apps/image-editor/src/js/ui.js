@@ -782,6 +782,7 @@ class Ui {
       menuBarPosition: this.options.menuBarPosition,
       usageStatistics: this.options.usageStatistics,
     });
+
     if (!this._submenuChangeTransection) {
       this._submenuChangeTransection = true;
       if (this.submenu) {
@@ -795,11 +796,14 @@ class Ui {
       }
 
       if (this.submenu === menuName && toggle) {
+        console.log('_submenuChangeTransection else');
         this.submenu = null;
       } else {
         // this._buttonElements[menuName].classList.add('active');
         this._mainElement.classList.add(`tui-image-editor-menu-${menuName}`);
         this.submenu = menuName;
+        console.log(this.submenu);
+        this._addSubMenuEvent(menuName);
         this[this.submenu].changeStartMode();
       }
 
@@ -817,7 +821,9 @@ class Ui {
    */
   _changeMenu(menuName, toggle, discardSelection) {
     if (this.submenu) {
-      this._buttonElements[this.submenu].classList.remove('active');
+      if (this._buttonElements[this.submenu]) {
+        this._buttonElements[this.submenu].classList.remove('active');
+      }
       this._mainElement.classList.remove(`tui-image-editor-menu-${this.submenu}`);
       if (discardSelection) {
         this._actions.main.discardSelection();

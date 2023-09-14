@@ -249,6 +249,14 @@ export default {
             this.changeIconColor(this.activeObjectId, color);
           }
         },
+        setDrawMode: (type, settings) => {
+          this.stopDrawingMode();
+          if (type === 'free') {
+            this.startDrawingMode('FREE_DRAWING', settings);
+          } else {
+            this.startDrawingMode('LINE_DRAWING', settings);
+          }
+        },
         setColor: (color) => {
           this.setBrush({
             color,
@@ -262,6 +270,10 @@ export default {
   _imagesAction() {
     return extend(
       {
+        changeColor: (color) => {
+          this._graphics.getCanvas().setBackgroundColor(color);
+          this._graphics.getCanvas().renderAll();
+        },
         setDrawMode: (type, settings) => {
           this.stopDrawingMode();
           if (type === 'free') {

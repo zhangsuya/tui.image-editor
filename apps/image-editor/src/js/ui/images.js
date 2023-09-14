@@ -32,18 +32,18 @@ class Images extends Submenu {
       registerIconButton: this.selector('.tie-icon-image-file'),
       addImageButton: this.selectorAll('.tui-image-editor-submenu-images-item'),
       drawColorPicker: new Colorpicker(this.selector('.tie-images-color'), {
-        defaultColor: '#00a9ff',
+        defaultColor: '#ffffff',
         toggleDirection: this.toggleDirection,
         usageStatistics: this.usageStatistics,
       }),
       iconColorpicker: new Colorpicker(this.selector('.tie-icon-color'), {
-        defaultColor: '#ffbb3b',
+        defaultColor: '#ffffff',
         toggleDirection: this.toggleDirection,
         usageStatistics: this.usageStatistics,
       }),
     };
-    console.log('this._els.addImageButton');
-    console.log(this._els.addImageButton);
+    // console.log('this._els.addImageButton');
+    // console.log(this._els.addImageButton);
 
     this.type = null;
     this.color = this._els.drawColorPicker.color;
@@ -80,6 +80,9 @@ class Images extends Submenu {
    */
   _changeDrawColor(color) {
     this.color = color || 'transparent';
+    console.log(this.color);
+    console.log(this.actions);
+
     this.actions.changeColor(this.color);
   }
 
@@ -91,6 +94,7 @@ class Images extends Submenu {
    *   @param {Function} actions.changeColor - change icon color
    */
   addEvent(actions) {
+    console.log('image addEvent');
     const registerIcon = this._registerIconHandler.bind(this);
     const addImage = this._addImageHandler.bind(this);
 
@@ -102,9 +106,9 @@ class Images extends Submenu {
     this.actions = actions;
     this._els.iconColorpicker.on('change', this._changeColorHandler.bind(this));
     this._els.registerIconButton.addEventListener('change', registerIcon);
-    this._els.addImageButton((imageButton) => {
-      imageButton.addEventListener('click', addImage);
-    });
+    // this._els.addImageButton((imageButton) => {
+    //   imageButton.addEventListener('click', addImage);
+    // });
     // this._els.addImageButton.addEventListener('click', addImage);
 
     this.colorPickerInputBox.addEventListener(
@@ -125,9 +129,9 @@ class Images extends Submenu {
     this._els.iconColorpicker.off();
     this._els.registerIconButton.removeEventListener('change', this.eventHandler.registerIcon);
     // eslint-disable-next-line array-callback-return
-    this._els.addImageButton.map((imageButton) => {
-      imageButton.removeEventListener('click', this.eventHandler.addImage);
-    });
+    // this._els.addImageButton.map((imageButton) => {
+    //   imageButton.removeEventListener('click', this.eventHandler.addImage);
+    // });
     this.colorPickerInputBox.removeEventListener(
       eventNames.FOCUS,
       this._onStartEditingInputBox.bind(this)
@@ -142,7 +146,6 @@ class Images extends Submenu {
    * Clear icon type
    */
   clearIconType() {
-    this._els.addImageButton.classList.remove(this.iconType);
     this.iconType = null;
   }
 
@@ -158,8 +161,8 @@ class Images extends Submenu {
    * Returns the menu to its default state.
    */
   changeStandbyMode() {
-    this.clearIconType();
-    this.actions.canceladdImage();
+    // this.clearIconType();
+    // this.actions.canceladdImage();
   }
 
   /**

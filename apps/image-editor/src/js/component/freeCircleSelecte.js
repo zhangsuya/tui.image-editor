@@ -16,7 +16,7 @@ class FreeCircleSelecte extends Component {
      * Brush width
      * @type {number}
      */
-    this.width = 1;
+    this.width = 3;
 
     this.renderCanvas = false;
 
@@ -24,7 +24,7 @@ class FreeCircleSelecte extends Component {
      * fabric.Color instance for brush color
      * @type {fabric.Color}
      */
-    this.oColor = new fabric.Color('rgba(0, 0, 0, 0.5)');
+    this.oColor = new fabric.Color('rgba(0, 114, 189, 255)');
     /**
      * Listeners
      * @type {object.<string, function>}
@@ -70,6 +70,7 @@ class FreeCircleSelecte extends Component {
     }
     brush.width = this.width;
     brush.color = this.oColor.toRgba();
+    brush.strokeDashArray = [15, 15];
   }
 
   /**
@@ -135,6 +136,7 @@ class FreeCircleSelecte extends Component {
 
   _onPathCreated(path) {
     console.log(path.path);
+    // strokeDashArray: [5, 5]
     const params = this.graphics.createObjectProperties(path.path);
     this.fire(eventNames.FREE_ADDING_LINE, params);
     if (!self.renderCanvas) {

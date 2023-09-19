@@ -174,6 +174,7 @@ export const eventNames = {
   INPUT_BOX_EDITING_STARTED: 'inputBoxEditingStarted',
   INPUT_BOX_EDITING_STOPPED: 'inputBoxEditingStopped',
   CHANGE_SUB_MENU: 'changeSubMenu',
+  CANCE_IMAGES_MENU: 'cancelImagesMunu',
   FOCUS: 'focus',
   BLUR: 'blur',
   IMAGE_RESIZED: 'imageResized',

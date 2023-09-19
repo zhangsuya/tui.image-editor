@@ -124,14 +124,14 @@ class FreeCircleSelecte extends Component {
     realPath.strokeDashArray = [5, 5];
     newCnavs.add(realPath);
     // eslint-disable-next-line no-undef
-    this._animateDashedLine(realPath);
+    // this._animateDashedLine(realPath);
     newCnavs.requestRenderAll();
-    realPath.setCoords();
-    realPath.animate('strokeDashOffset', '-=3', {
-      duration: 100,
-      onchange: this.getCanvas().renderAll.bind(this.getCanvas()),
-      repeat: true,
-    });
+    // realPath.setCoords();
+    // realPath.animate('strokeDashOffset', '-=3', {
+    //   duration: 100,
+    //   onchange: this.getCanvas().renderAll.bind(this.getCanvas()),
+    //   repeat: true,
+    // });
   }
 
   _onPathCreated(path) {

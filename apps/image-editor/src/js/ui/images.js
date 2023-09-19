@@ -29,6 +29,8 @@ class Images extends Submenu {
     this._iconMap = {};
 
     this._els = {
+      apply: this.selector('.tie-images-button .apply'),
+      cancel: this.selector('.tie-images-button .cancel'),
       registerIconButton: this.selector('.tie-icon-image-file'),
       addImageButton: this.selectorAll('.tui-image-editor-submenu-images-item'),
       loadImageButton: this.selector('.tui-image-editor-load-btn'),
@@ -96,20 +98,28 @@ class Images extends Submenu {
    */
   addEvent(actions) {
     console.log('image addEvent');
+    console.log(this._els.apply);
+    const apply = this._applyEventHandler.bind(this);
+    const cancel = this._cancelEventHandler.bind(this);
     const registerIcon = this._registerIconHandler.bind(this);
     const addImage = this._addImageHandler.bind(this);
     const loadImage = this._loadImageHandler.bind(this);
 
     this.eventHandler = {
+      apply,
+      cancel,
       registerIcon,
       addImage,
       loadImage,
     };
 
     this.actions = actions;
+    this._els.apply.addEventListener('click', apply);
+    this._els.cancel.addEventListener('click', cancel);
     this._els.iconColorpicker.on('change', this._changeColorHandler.bind(this));
     this._els.registerIconButton.addEventListener('change', registerIcon);
     this._els.loadImageButton.addEventListener('change', loadImage);
+    this._els.cancel.classList.add('active');
     // this._els.addImageButton((imageButton) => {
     //   imageButton.addEventListener('click', addImage);
     // });
@@ -131,6 +141,8 @@ class Images extends Submenu {
    */
   _removeEvent() {
     this._els.iconColorpicker.off();
+    // this._els.apply.removeEventListener('click', this.eventHandler.apply);
+    // this._els.cancel.removeEventListener('click', this.eventHandler.cancel);
     this._els.registerIconButton.removeEventListener('change', this.eventHandler.registerIcon);
     // eslint-disable-next-line array-callback-return
     // this._els.addImageButton.map((imageButton) => {
@@ -167,6 +179,29 @@ class Images extends Submenu {
   changeStandbyMode() {
     // this.clearIconType();
     // this.actions.canceladdImage();
+  }
+
+  /**
+   * Change apply button status
+   * @param {Boolean} enableStatus - apply button status
+   */
+  changeApplyButtonStatus(enableStatus) {
+    if (enableStatus) {
+      this._els.apply.classList.add('active');
+    } else {
+      this._els.apply.classList.remove('active');
+    }
+  }
+
+  _applyEventHandler() {
+    this.actions.mix();
+    this._els.apply.classList.remove('active');
+  }
+
+  _cancelEventHandler() {
+    console.log('cancel');
+    this.actions.cancel();
+    this._els.apply.classList.remove('active');
   }
 
   /**

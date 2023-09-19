@@ -277,6 +277,12 @@ export default {
 
     return extend(
       {
+        mix: () => {},
+        cancel: () => {
+          console.log('action cancel');
+          this.stopDrawingMode();
+          this.ui.changeImagesMenu([]);
+        },
         changeColor: (color) => {
           this._graphics.getCanvas().setBackgroundColor(color);
           this._graphics.getCanvas().renderAll();

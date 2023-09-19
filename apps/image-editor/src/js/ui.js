@@ -786,7 +786,7 @@ class Ui {
     if (!this._submenuChangeTransection) {
       this._submenuChangeTransection = true;
       if (this.submenu) {
-        this._buttonElements[this.submenu].classList.remove('active');
+        this.fire(eventNames.CANCE_IMAGES_MENU);
         this._mainElement.classList.remove(`tui-image-editor-menu-${this.submenu}`);
         if (discardSelection) {
           this._actions.main.discardSelection();

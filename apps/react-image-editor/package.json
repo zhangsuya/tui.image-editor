@@ -1,6 +1,6 @@
 {
   "name": "fun-react-image-editor",
-  "version": "3.15.85",
+  "version": "3.15.87",
   "description": "TOAST UI Image-Editor for React",
   "main": "dist/fun-react-image-editor.js",
   "files": [
@@ -31,6 +31,6 @@
   },
   "dependencies": {
     "fabric": "^4.2.0",
-    "fun-tui-image-editor": "^3.15.2"
+    "fun-tui-image-editor": "^3.15.86"
   }
 }

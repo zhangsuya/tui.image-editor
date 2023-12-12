@@ -23,6 +23,8 @@ const {
   MOUSE_DOWN,
   MOUSE_MOVE,
   FREE_ADDING_LINE,
+  FREE_PAINTING_LINE,
+  ADD_BACKGROUND,
   OBJECT_MOVED,
   OBJECT_SCALED,
   OBJECT_ACTIVATED,
@@ -230,6 +232,8 @@ class ImageEditor {
       selectionCleared: this._selectionCleared.bind(this),
       selectionCreated: this._selectionCreated.bind(this),
       freeDrawingLineAdd: this._onFreeDrawingLineAdd.bind(this),
+      freePaintingLineAdd: this._onFreePaintingLineAdd.bind(this),
+      addBackground: this._onAddBackground.bind(this),
     };
 
     this._attachInvokerEvents();
@@ -363,6 +367,8 @@ class ImageEditor {
       [SELECTION_CLEARED]: this._handlers.selectionCleared,
       [SELECTION_CREATED]: this._handlers.selectionCreated,
       [FREE_ADDING_LINE]: this._handlers.freeDrawingLineAdd,
+      [FREE_PAINTING_LINE]: this._handlers.freePaintingLineAdd,
+      [ADD_BACKGROUND]: this._handlers.addBackground,
     });
   }
 
@@ -1355,6 +1361,22 @@ class ImageEditor {
    */
   _onFreeDrawingLineAdd(objectProps) {
     this.fire(events.FREE_ADDING_LINE, objectProps);
+  }
+  /**
+   * 'freePaintingLineAdd' event handler
+   * @param {Object} objectProps added object properties
+   * @private
+   */
+  _onFreePaintingLineAdd(objectProps) {
+    this.fire(events.FREE_PAINTING_LINE, objectProps);
+  }
+  /**
+   * 'addObjectAfter' event handler
+   * @param {Object} objectProps added object properties
+   * @private
+   */
+  _onAddBackground(objectProps) {
+    this.fire(events.ADD_BACKGROUND, objectProps);
   }
   /**
    * 'objectAdded' event handler

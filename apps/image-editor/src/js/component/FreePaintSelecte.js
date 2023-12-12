@@ -8,9 +8,9 @@ import { eventNames, componentNames } from '@/consts';
  * @extends {Component}
  * @ignore
  */
-class FreeCircleSelecte extends Component {
+class FreePaintSelecte extends Component {
   constructor(graphics) {
-    super(componentNames.FREE_CIRCLE_SELECTE, graphics);
+    super(componentNames.FREE_PAINT_SELECTE, graphics);
 
     /**
      * Brush width
@@ -24,7 +24,7 @@ class FreeCircleSelecte extends Component {
      * fabric.Color instance for brush color
      * @type {fabric.Color}
      */
-    this.oColor = new fabric.Color('rgba(0, 114, 189, 255)');
+    this.oColor = new fabric.Color('rgba(0, 114, 189, 0.1)');
     /**
      * Listeners
      * @type {object.<string, function>}
@@ -58,7 +58,7 @@ class FreeCircleSelecte extends Component {
     const brush = this.getCanvas().freeDrawingBrush;
 
     setting = setting || {};
-    // console.log('FreeCircleSelecte setBrush');
+    // console.log('FreePaintSelecte setBrush');
     // console.log(setting);
 
     this.width = setting.width || this.width;
@@ -83,12 +83,13 @@ class FreeCircleSelecte extends Component {
   }
 
   _onBeforePathCreated(path) {
-    // console.log('FreeCircleSelecte end');
+    // console.log('FreePaintSelecte end');
     console.log(path);
   }
 
+  // eslint-disable-next-line no-unused-vars
   _onPathCreated(path) {
-    console.log('FreeCircleSelecte end');
+    console.log('FreePaintSelecte end');
     path.path.fill = this.oColor.toRgba();
     this.getCanvas().renderTop();
     const canvasEl = this.getCanvas().getSelectionElement();
@@ -105,9 +106,8 @@ class FreeCircleSelecte extends Component {
     newCanvasContext.fillStyle = 'black';
     newCanvasContext.fillRect(0, 0, canvasEl.width, canvasEl.height); // redraw the saved chart back to the main canvas
     newCanvasContext.drawImage(canvasEl, 0, 0);
-
     // const params = this.graphics.createObjectProperties(path.path);
-    this.fire(eventNames.FREE_ADDING_LINE, newCanvasEle.toDataURL());
+    this.fire(eventNames.FREE_PAINTING_LINE, newCanvasEle.toDataURL());
   }
 
   // 定义动画函数
@@ -121,7 +121,7 @@ class FreeCircleSelecte extends Component {
 
   _animate(offset, speed, path) {
     offset += speed;
-    console.log('FreeCircleSelecte animate');
+    console.log('FreePaintSelecte animate');
     console.log(offset);
     path.set({
       strokeDashOffset: -offset,
@@ -135,4 +135,4 @@ class FreeCircleSelecte extends Component {
   }
 }
 
-export default FreeCircleSelecte;
+export default FreePaintSelecte;

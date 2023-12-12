@@ -177,7 +177,7 @@ class Theme {
       const parser = new DOMParser();
       const encodedURI = icon.replace(/data:image\/svg\+xml;base64,/, '');
       const dom = parser.parseFromString(atob(encodedURI), 'text/xml');
-
+      dom.documentElement.style.width = 0;
       document.body.appendChild(dom.documentElement);
     }
   }

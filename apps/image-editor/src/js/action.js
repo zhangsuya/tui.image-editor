@@ -304,6 +304,7 @@ export default {
             this.ui.resizeEditor({ imageSize: sizeValue });
             this.clearUndoStack();
             this._invoker.fire(eventNames.EXECUTE_COMMAND, historyNames.LOAD_IMAGE);
+            this._invoker.fire(eventNames.ADD_BACKGROUND, imgUrl);
           });
         },
         setColor: (color) => {
